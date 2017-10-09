@@ -1,12 +1,12 @@
 cmake_minimum_required (VERSION 2.8.8)
 project (Simple-Web-Server)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Wsign-conversion")
 
 include_directories(.)
 
 find_package(Threads REQUIRED)
 
-set(BOOST_COMPONENTS system thread filesystem date_time)
+set(BOOST_COMPONENTS system filesystem thread)
 # Late 2017 TODO: remove the following checks and always use std::regex
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.9)
@@ -49,4 +49,4 @@ endif()
 enable_testing()
 add_subdirectory(tests)
 
-install(FILES server_http.hpp client_http.hpp server_https.hpp client_https.hpp DESTINATION include/simple-web-server)
+install(FILES server_http.hpp client_http.hpp server_https.hpp client_https.hpp crypto.hpp utility.hpp status_code.hpp DESTINATION include/simple-web-server)
